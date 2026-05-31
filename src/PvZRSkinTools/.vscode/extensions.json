@@ -3,6 +3,7 @@
         "ms-python.python",
         "pkief.material-icon-theme",
         "charliermarsh.ruff",
-        "sonarsource.sonarlint-vscode"
+        "sonarsource.sonarlint-vscode",
+        "ms-python.pylint"
     ]
 }
