@@ -14,15 +14,19 @@ from rich.console import Console
 from rich.table import Column
 
 import asset_processor
+import game_scanner
+from file_dialog import FileDialog
 
 
 def main():
-    output_directory = Path("output")
-    bundle_path = r"C:\Program Files (x86)\Steam\steamapps\common\PVZ Replanted\Replanted_Data\StreamingAssets\aa\StandaloneWindows64\spineassets_assets_assets\art\characters\spine.bundle"
-
     console = Console()
+    dialog = FileDialog(console)
+
+    output_directory = dialog.pick_directory("Select an output directory", must_be_empty=True)
+    bundle_path = game_scanner.pick_spine_bundle(dialog)
+
     console.print("[bold cyan]Loading bundle...[/bold cyan]")
-    env = UnityPy.load(bundle_path)
+    env = UnityPy.load(str(bundle_path))
 
     assets = [
         (path, obj)
