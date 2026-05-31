@@ -8,7 +8,8 @@ from file_dialog import FileDialog
 GAME_DIR_NAME = "PVZ Replanted"
 
 SPINE_BUNDLE_PATH = Path(
-    "Replanted_Data/StreamingAssets/aa/StandaloneWindows64/spineassets_assets_assets/art/characters/spine.bundle"
+    "Replanted_Data/StreamingAssets/aa/StandaloneWindows64/"
+    "spineassets_assets_assets/art/characters/spine.bundle"
 )
 
 

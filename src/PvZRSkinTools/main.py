@@ -58,7 +58,8 @@ def main():
             progress.advance(task)
 
     console.print(
-        f"[bold green]✓ Done![/bold green] Extracted {len(assets)} assets to [dim]{output_directory}[/dim]"
+        f"[bold green]✓ Done![/bold green] Extracted {len(assets)} assets to "
+        f"[dim]{output_directory}[/dim]"
     )
 
 

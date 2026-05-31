@@ -1,6 +1,7 @@
 {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,
+    "editor.rulers": [88],
     "files.exclude": {
         "**/__pycache__": true,
         ".ruff_cache": true,
@@ -8,5 +9,5 @@
     },
     "python.analysis.typeCheckingMode": "strict",
     "python.analysis.diagnosticMode": "workspace",
-    "sonarlint.disableTelemetry": true
+    "sonarlint.disableTelemetry": true,
 }
