@@ -3,7 +3,7 @@ name = "pvzrskintools"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = [
     "rich>=15.0.0",
     "spineatlas>=1.0.13",
@@ -12,6 +12,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "nuitka>=4.1.2",
     "pylint>=4.0.5",
     "ruff>=0.15.15",
 ]
