@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 import UnityPy
@@ -18,8 +19,10 @@ import game_scanner
 from file_dialog import FileDialog
 
 
+console = Console()
+
+
 def main():
-    console = Console()
     dialog = FileDialog(console)
 
     bundle_path = game_scanner.pick_spine_bundle(dialog)
@@ -64,4 +67,17 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    exit_code = None
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nCancelled...")
+        exit_code = 130
+    except Exception:  # pylint: disable=broad-exception-caught
+        console.print_exception(show_locals=True)
+        exit_code = 1
+
+    input("Press Enter to continue...")
+
+    if exit_code is not None:
+        sys.exit(exit_code)
