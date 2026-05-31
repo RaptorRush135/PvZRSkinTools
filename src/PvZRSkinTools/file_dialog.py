@@ -12,11 +12,18 @@ class FileDialog:
         self.root.withdraw()
         self.root.attributes("-topmost", True)  # type: ignore
 
-    def pick_directory(self, title: str, initial_directory: str | None = None, must_be_empty: bool = False) -> Path:
+    def pick_directory(
+        self,
+        title: str,
+        initial_directory: str | None = None,
+        must_be_empty: bool = False,
+    ) -> Path:
         self.console.print(f"{title}:")
 
         while True:
-            directory = filedialog.askdirectory(title=title, initialdir=initial_directory)
+            directory = filedialog.askdirectory(
+                title=title, initialdir=initial_directory
+            )
 
             if not directory:
                 self.print_warning("No directory selected")
@@ -33,7 +40,7 @@ class FileDialog:
 
             self.console.print(f"Selected: [dim]{path}[/dim]")
             return path
-    
+
     def print_warning(self, message: str):
         self.console.print(f"[yellow]⚠  {message}[/yellow]")
         print("\a", end="")

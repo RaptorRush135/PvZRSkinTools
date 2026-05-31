@@ -50,9 +50,12 @@ PLANTS = (
     "imitater",
 )
 
+
 def get_asset_classification(file_name: str) -> str:
     normalized_name = file_name.lower()
-    if normalized_name.startswith(("zombie", "vstombstones")) or normalized_name.endswith(("zombie", "zombotany")):
+    if normalized_name.startswith(
+        ("zombie", "vstombstones")
+    ) or normalized_name.endswith(("zombie", "zombotany")):
         return "Zombies"
     if normalized_name.startswith(PLANTS):
         return "Plants"

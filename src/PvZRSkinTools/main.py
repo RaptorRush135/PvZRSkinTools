@@ -23,7 +23,9 @@ def main():
     dialog = FileDialog(console)
 
     bundle_path = game_scanner.pick_spine_bundle(dialog)
-    output_directory = dialog.pick_directory("Select an output directory", must_be_empty=True)
+    output_directory = dialog.pick_directory(
+        "Select an output directory", must_be_empty=True
+    )
 
     console.print("[bold cyan]Loading bundle...[/bold cyan]")
     env = UnityPy.load(str(bundle_path))
@@ -36,7 +38,9 @@ def main():
 
     with Progress(
         SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}", table_column=Column(width=25)),
+        TextColumn(
+            "[progress.description]{task.description}", table_column=Column(width=25)
+        ),
         BarColumn(),
         TaskProgressColumn(),
         TimeElapsedColumn(),
@@ -53,7 +57,10 @@ def main():
 
             progress.advance(task)
 
-    console.print(f"[bold green]✓ Done![/bold green] Extracted {len(assets)} assets to [dim]{output_directory}[/dim]")
+    console.print(
+        f"[bold green]✓ Done![/bold green] Extracted {len(assets)} assets to [dim]{output_directory}[/dim]"
+    )
+
 
 if __name__ == "__main__":
     main()
