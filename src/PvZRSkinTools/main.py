@@ -22,8 +22,8 @@ def main():
     console = Console()
     dialog = FileDialog(console)
 
-    output_directory = dialog.pick_directory("Select an output directory", must_be_empty=True)
     bundle_path = game_scanner.pick_spine_bundle(dialog)
+    output_directory = dialog.pick_directory("Select an output directory", must_be_empty=True)
 
     console.print("[bold cyan]Loading bundle...[/bold cyan]")
     env = UnityPy.load(str(bundle_path))
