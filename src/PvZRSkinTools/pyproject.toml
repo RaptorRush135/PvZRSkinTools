@@ -9,3 +9,8 @@ dependencies = [
     "spineatlas>=1.0.13",
     "unitypy>=1.25.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.15",
+]
