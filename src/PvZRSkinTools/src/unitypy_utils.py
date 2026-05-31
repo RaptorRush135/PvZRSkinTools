@@ -18,5 +18,5 @@ def write_text_asset(text_asset: TextAsset, output_path: Path) -> None:
 
 
 def write_binary_text_asset(text_asset: TextAsset, output_path: Path) -> None:
-    bytes = text_asset.m_Script.encode("utf-8", errors="surrogateescape")
-    output_path.write_bytes(bytes)
+    data = text_asset.m_Script.encode("utf-8", errors="surrogateescape")
+    output_path.write_bytes(data)
