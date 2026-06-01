@@ -25,6 +25,8 @@ uv run nuitka --standalone \
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
+cp -r tools/ build/PvZRSkinTools/
+
 tput bel
 
 read -p "Build finished. Press Enter to exit..."

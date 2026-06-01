@@ -11,3 +11,7 @@ wheels/
 
 # Nuitka
 nuitka-crash-report.xml
+
+# Project
+scripts/cache/
+tools/
