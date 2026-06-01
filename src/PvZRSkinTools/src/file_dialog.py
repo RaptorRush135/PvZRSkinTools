@@ -1,4 +1,5 @@
 from pathlib import Path
+import time
 
 from tkinter import Tk, filedialog
 
@@ -41,6 +42,8 @@ class FileDialog:
             self.console.print(f"Selected: [dim]{path}[/dim]")
             return path
 
-    def print_warning(self, message: str):
+    def print_warning(self, message: str, delay: bool = True):
         self.console.print(f"[yellow]⚠  {message}[/yellow]")
         print("\a", end="")
+        if delay:
+            time.sleep(2)

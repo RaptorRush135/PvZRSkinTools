@@ -34,7 +34,9 @@ def pick_spine_bundle(dialog: FileDialog) -> Path:
         )
         spine_bundle = picked_dir / SPINE_BUNDLE_PATH
         if not spine_bundle.is_file():
-            dialog.print_warning(f"Path not found: [dim]{spine_bundle}[/dim]")
+            dialog.print_warning(
+                f"Path not found: [dim]{spine_bundle}[/dim]", delay=False
+            )
             dialog.print_warning(f"Select the '{GAME_DIR_NAME}' directory")
             continue
 
