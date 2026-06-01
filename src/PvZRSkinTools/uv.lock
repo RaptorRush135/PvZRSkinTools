@@ -308,12 +308,36 @@ wheels = [
 ]
 
 [[package]]
+name = "pip-licenses"
+version = "5.5.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "prettytable" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7d/18/ddd93af610a04f56a51a27095ddfe55238e1ec236f6758730a0d2c0b49f2/pip_licenses-5.5.5.tar.gz", hash = "sha256:60750c006adf7a0910347b726e8ee9fee3bc8d2e7c8307a5c4ec0776c8e2a276", size = 54955, upload-time = "2026-03-28T22:12:56.48Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/9a/6acfdb8d463eac7cdae7534d35d72237eca63f5fbafe797289d8a5fae447/pip_licenses-5.5.5-py3-none-any.whl", hash = "sha256:f4c4c6d9e6a03612cf59f29f19dc8ab54904d82e055b8e191498f2279a224e14", size = 23247, upload-time = "2026-03-28T22:12:54.89Z" },
+]
+
+[[package]]
 name = "platformdirs"
 version = "4.10.0"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d7/47/e4501f49c178ae1d9f4a75073fda4204f52647993f075a9db4d14930e0c5/platformdirs-4.10.0.tar.gz", hash = "sha256:31e761a6a0ca04faf7353ea759bdba55652be214725111e5aac52dfa29d4bef7", size = 31224, upload-time = "2026-05-28T03:32:53.587Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/81/e6/cd9575ac904136b3cbf7aa7ee819ef86eedb7274e46f230e94ea4342e729/platformdirs-4.10.0-py3-none-any.whl", hash = "sha256:fb516cdb12eb0d857d0cd85a7c57cea4d060bee4578d6cf5a14dfdf8cbf8784a", size = 22743, upload-time = "2026-05-28T03:32:52.175Z" },
+]
+
+[[package]]
+name = "prettytable"
+version = "3.17.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "wcwidth" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/79/45/b0847d88d6cfeb4413566738c8bbf1e1995fad3d42515327ff32cc1eb578/prettytable-3.17.0.tar.gz", hash = "sha256:59f2590776527f3c9e8cf9fe7b66dd215837cca96a9c39567414cbc632e8ddb0", size = 67892, upload-time = "2025-11-14T17:33:20.212Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ee/8c/83087ebc47ab0396ce092363001fa37c17153119ee282700c0713a195853/prettytable-3.17.0-py3-none-any.whl", hash = "sha256:aad69b294ddbe3e1f95ef8886a060ed1666a0b83018bbf56295f6f226c43d287", size = 34433, upload-time = "2025-11-14T17:33:19.093Z" },
 ]
 
 [[package]]
@@ -329,6 +353,7 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "nuitka" },
+    { name = "pip-licenses" },
     { name = "pylint" },
     { name = "ruff" },
 ]
@@ -343,6 +368,7 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "nuitka", specifier = ">=4.1.2" },
+    { name = "pip-licenses", specifier = ">=5.5.5" },
     { name = "pylint", specifier = ">=4.0.5" },
     { name = "ruff", specifier = ">=0.15.15" },
 ]
@@ -512,4 +538,13 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/c2/94/29ae79472e1bb5ff1f7241ac17d7abcd0e010819cece8ccb80a2a5532d87/unitypy-1.25.0-cp314-cp314t-win32.whl", hash = "sha256:bfc9b0c81ff5e051366c173282bbfb888574ce30a9b81bcb2efed652910190f4", size = 409541, upload-time = "2026-02-23T12:23:43.717Z" },
     { url = "https://files.pythonhosted.org/packages/1d/28/c43abc745f332d65dd8adab97b20fb1278f176b72b863bc724678ab29aad/unitypy-1.25.0-cp314-cp314t-win_amd64.whl", hash = "sha256:dc273f8274c12537f182054a10e8a604d5d7ff4cb09023cced9a4db9a2751503", size = 415751, upload-time = "2026-02-23T12:23:45.613Z" },
     { url = "https://files.pythonhosted.org/packages/f1/60/b0b7e4b7c2915f4f6673cf695595c6e9eede3964bfb98258f94ac137fb2e/unitypy-1.25.0-cp314-cp314t-win_arm64.whl", hash = "sha256:e29e3db3e4d74599ea78c317c5f291324097634244f6d95933816973150291ea", size = 407222, upload-time = "2026-02-23T12:23:47.515Z" },
+]
+
+[[package]]
+name = "wcwidth"
+version = "0.7.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2c/ee/afaf0f85a9a18fe47a67f1e4422ed6cf1fe642f0ae0a2f81166231303c52/wcwidth-0.7.0.tar.gz", hash = "sha256:90e3a7ea092341c44b99562e75d09e4d5160fe7a3974c6fb842a101a95e7eed0", size = 182132, upload-time = "2026-05-02T16:04:12.653Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/41/52/e465037f5375f43533d1a80b6923955201596a99142ed524d77b571a1418/wcwidth-0.7.0-py3-none-any.whl", hash = "sha256:5d69154c429a82910e241c738cd0e2976fac8a2dd47a1a805f4afed1c0f136f2", size = 110825, upload-time = "2026-05-02T16:04:11.033Z" },
 ]

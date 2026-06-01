@@ -13,5 +13,6 @@ wheels/
 nuitka-crash-report.xml
 
 # Project
+licenses/
 scripts/cache/
 tools/

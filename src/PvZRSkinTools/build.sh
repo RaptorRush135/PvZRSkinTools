@@ -27,6 +27,12 @@ mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
 cp -r tools/ build/PvZRSkinTools/
 
+cp -r licenses/* build/PvZRSkinTools/
+
+uv run pip-licenses --format=plain-vertical \
+  --with-license-file --no-license-path \
+  --output-file build/PvZRSkinTools/THIRD_PARTY_LICENSES.txt
+
 tput bel
 
 read -p "Build finished. Press Enter to exit..."
