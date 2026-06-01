@@ -3,11 +3,13 @@ set -e
 
 trap 'echo "Error occurred! Press Enter to exit..."; read' ERR
 
+rm -rf build/PvZRSkinTools
+
 uv run nuitka --standalone \
+  --user-package-configuration-file=package-config.yaml \
   --enable-plugin=tk-inter \
   --include-package=UnityPy \
   --include-package-data=UnityPy \
-  --include-data-file=.venv/Lib/site-packages/fmod_toolkit/libfmod/Windows/x64/fmod.dll=fmod_toolkit/libfmod/Windows/x64/fmod.dll \
   --include-package-data=archspec \
   --noinclude-dlls=libcrypto-3-x64.dll \
   --noinclude-dlls=libssl-3-x64.dll \
@@ -20,6 +22,8 @@ uv run nuitka --standalone \
   --output-folder-name=PvZRSkinTools \
   --output-filename=PvZRSkinTools.exe \
   src/main.py
+
+mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
 tput bel
 

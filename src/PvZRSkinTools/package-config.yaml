@@ -1,0 +1,17 @@
+- module-name: 'fmod_toolkit'
+  dlls:
+    - from_filenames:
+        relative_path: 'libfmod/Windows/x64'
+        prefixes:
+          - 'fmod'
+        suffixes:
+          - 'dll'
+      when: 'win32 and arch_amd64'
+
+    - from_filenames:
+        relative_path: 'libfmod/Linux/x86_64'
+        prefixes:
+          - 'libfmod'
+        suffixes:
+          - 'so'
+      when: 'linux and arch_amd64'
