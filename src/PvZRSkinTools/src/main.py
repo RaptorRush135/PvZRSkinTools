@@ -26,8 +26,10 @@ def main():
     dialog = FileDialog(console)
 
     bundle_path = game_scanner.pick_spine_bundle(dialog)
+
+    base_dir = str(Path(sys.executable).parent)
     output_directory = dialog.pick_directory(
-        "Select an output directory", must_be_empty=True
+        "Select an output directory", initial_directory=base_dir, must_be_empty=True
     )
 
     console.print("[bold cyan]Loading bundle...[/bold cyan]")
