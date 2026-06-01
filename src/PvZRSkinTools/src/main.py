@@ -23,7 +23,7 @@ from paths import BASE_DIR
 console = Console()
 
 
-def main():
+def extract_bundle_assets() -> None:
     dialog = FileDialog(console)
 
     bundle_path = game_scanner.pick_spine_bundle(dialog)
@@ -70,18 +70,19 @@ def main():
     )
 
 
-if __name__ == "__main__":
-    exit_code = None
+def main() -> int:
     try:
-        main()
+        extract_bundle_assets()
     except KeyboardInterrupt:
         print("\nCancelled...")
-        exit_code = 130
+        return 130
     except Exception:  # pylint: disable=broad-exception-caught
         console.print_exception(show_locals=True)
-        exit_code = 1
+        return 1
+    return 0
 
+
+if __name__ == "__main__":
+    EXIT_CODE = main()
     input("Press Enter to continue...")
-
-    if exit_code is not None:
-        sys.exit(exit_code)
+    raise SystemExit(EXIT_CODE)
