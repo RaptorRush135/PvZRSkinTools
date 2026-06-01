@@ -5,6 +5,8 @@ trap 'echo "Error occurred! Press Enter to exit..."; read' ERR
 
 rm -rf build/PvZRSkinTools
 
+INTERACTIVE=0 bash setup.sh
+
 uv run nuitka --standalone \
   --user-package-configuration-file=package-config.yaml \
   --enable-plugin=tk-inter \
