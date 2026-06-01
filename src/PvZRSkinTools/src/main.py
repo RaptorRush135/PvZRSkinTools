@@ -17,6 +17,7 @@ from rich.table import Column
 import asset_processor
 import game_scanner
 from file_dialog import FileDialog
+from paths import BASE_DIR
 
 
 console = Console()
@@ -27,9 +28,10 @@ def main():
 
     bundle_path = game_scanner.pick_spine_bundle(dialog)
 
-    base_dir = str(Path(sys.executable).parent)
     output_directory = dialog.pick_directory(
-        "Select an output directory", initial_directory=base_dir, must_be_empty=True
+        "Select an output directory",
+        initial_directory=str(BASE_DIR),
+        must_be_empty=True,
     )
 
     console.print("[bold cyan]Loading bundle...[/bold cyan]")
