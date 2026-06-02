@@ -23,6 +23,8 @@ uv run nuitka --standalone \
   --output-dir=build \
   --output-folder-name=PvZRSkinTools \
   --output-filename=PvZRSkinTools.exe \
+  --product-name=PvZRSkinTools \
+  --product-version=0.0.1 \
   src/main.py
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
