@@ -127,8 +127,11 @@ def __process_paths(
                     continue
 
                 console.print(f" - Converting skeleton: {path.name} -> {out_path.name}")
-                spine_converter.convert_skeleton(path, out_path, version)
-                print_success()
+                error = spine_converter.convert_skeleton(path, out_path, version)
+                if error is None:
+                    print_success()
+                else:
+                    console.print(f" [red]{error}\n")
             else:
                 out_path = __validate_output_path(
                     __try_get_output_path(path, version), print_warning
@@ -142,6 +145,7 @@ def __process_paths(
                 print_success()
         except Exception:  # pylint: disable=broad-exception-caught
             console.print_exception()
+            console.print()
 
     console.print("[bold green]✓ Done!\n")
 

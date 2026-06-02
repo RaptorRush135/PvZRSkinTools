@@ -37,15 +37,31 @@ def convert_skeleton(
     input_file: Path,
     output_file: Path,
     version: SpineVersion | None = None,
-) -> None:
+) -> str | None:
     output_file.parent.mkdir(parents=True, exist_ok=True)
 
     command = [CONVERTER_EXE, str(input_file), str(output_file)]
-    if version:
+    if version is not None:
         command.extend(["-v", get_version_string(version)])
 
-    # TODO: Handle errors
-    subprocess.run(command, stdout=subprocess.DEVNULL, check=True)
+    try:
+        subprocess.run(
+            command,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+    except FileNotFoundError:
+        return f"Converter executable not found: '{CONVERTER_EXE}'"
+    except subprocess.CalledProcessError as ex:
+        stderr = ex.stderr.strip()
+        if stderr:
+            return stderr
+
+        return f"Converter exited with code {ex.returncode}"
+
+    return None
 
 
 def convert_atlas(
