@@ -5,8 +5,7 @@
             "name": "Python Debugger: Module",
             "type": "debugpy",
             "request": "launch",
-            "module": "main",
-            "cwd": "${workspaceFolder}/src",
+            "module": "src.main",
             "console": "externalTerminal"
         }
     ]

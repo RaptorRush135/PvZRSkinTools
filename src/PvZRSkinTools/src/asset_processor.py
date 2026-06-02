@@ -2,10 +2,10 @@ from pathlib import Path
 
 from UnityPy.classes import Object, PPtr
 
-import unitypy_utils
-
-import asset_classifier
-import spine_converter
+from src import unitypy_utils
+from src import asset_classifier
+from src import spine_converter
+from src.spine_converter import SpineVersion
 
 
 def asset_filter(path: str) -> bool:
@@ -41,7 +41,7 @@ def process_asset(output_directory: Path, file_name: str, obj: PPtr[Object]) -> 
 
             v3_json = v3_dir / f"{output_path.stem}.json"
             v3_skel = v3_dir / f"{output_path.stem}.skel"
-            spine_converter.convert_skeleton(output_path, v3_json, "3.8.0")
+            spine_converter.convert_skeleton(output_path, v3_json, SpineVersion.V3)
             spine_converter.convert_skeleton(v3_json, v3_skel)
         elif file_name.endswith(".atlas"):
             unitypy_utils.write_text_asset(text_asset, output_path)
@@ -49,5 +49,5 @@ def process_asset(output_directory: Path, file_name: str, obj: PPtr[Object]) -> 
             spine_converter.convert_atlas(
                 output_path,
                 v3_dir / output_path.name,
-                spine_converter.AtlasVersion.V3,
+                SpineVersion.V3,
             )
