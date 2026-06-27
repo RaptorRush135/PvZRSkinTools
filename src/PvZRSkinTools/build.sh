@@ -4,6 +4,8 @@ set -e
 trap 'echo "Error occurred! Press Enter to exit..."; read' ERR
 
 rm -rf build/PvZRSkinTools
+rm -rf build/PvZRSkinTools.build
+rm -rf build/PvZRSkinTools.dist
 
 INTERACTIVE=0 bash setup.sh
 
