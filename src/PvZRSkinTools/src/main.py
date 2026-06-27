@@ -53,7 +53,7 @@ def menu() -> None:
 
 def handle_options(choice: int) -> bool:
     def show_cancel_msg():
-        console.print("[dim]Press Ctrl+C to cancel a operation...[dim]\n")
+        console.print("[dim]Press Ctrl+Shift+C to cancel a operation...[dim]\n")
 
     match choice:
         case 1:

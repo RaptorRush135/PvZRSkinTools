@@ -8,6 +8,10 @@ dynamic_padding = true
 [cursor]
 style = { shape = "Beam" }
 
-[[keyboard.bindings]]
-key = "NumpadEnter"
-chars = "\r"
+[keyboard]
+bindings = [
+    { key = "NumpadEnter", chars = "\r" },
+    { key = "C", mods = "Control", action = "Copy" },
+    { key = "V", mods = "Control", action = "Paste" },
+    { key = "C", mods = "Control|Shift", chars = "\u0003" },
+]
