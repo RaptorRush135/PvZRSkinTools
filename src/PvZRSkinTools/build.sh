@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-trap 'echo "Error occurred! Press Enter to exit..."; read' ERR
+trap '
+  tput bel
+  echo "Error occurred! Press Enter to exit..."
+  read
+' ERR
 
 rm -rf build/PvZRSkinTools
 rm -rf build/PvZRSkinTools.build
