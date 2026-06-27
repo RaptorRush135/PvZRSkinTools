@@ -34,6 +34,8 @@ mv build/PvZRSkinTools.dist build/PvZRSkinTools
 cp -r include/* build/PvZRSkinTools/
 cp -r build/include/* build/PvZRSkinTools/
 
+# TODO: Modify icon
+
 uv run pip-licenses --format=plain-vertical \
   --with-license-file --no-license-path \
   --output-file build/PvZRSkinTools/THIRD_PARTY_LICENSES.txt

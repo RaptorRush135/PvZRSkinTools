@@ -1,0 +1,13 @@
+[general]
+import = ["afterglow.toml"]
+
+[window]
+padding = { x = 8, y = 8 }
+dynamic_padding = true
+
+[cursor]
+style = { shape = "Beam" }
+
+[[keyboard.bindings]]
+key = "NumpadEnter"
+chars = "\r"

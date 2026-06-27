@@ -2,6 +2,8 @@ import time
 
 from rich.console import Console
 
+from src import launcher
+
 from src import choice_picker
 from src.choice_picker import Choice
 
@@ -15,7 +17,6 @@ console = Console()
 
 
 def main() -> int:
-    print(f"PvZRSkinTools v{APP_VERSION}\n")
     try:
         menu()
     except KeyboardInterrupt:
@@ -68,6 +69,8 @@ def handle_options(choice: int) -> bool:
 
 
 if __name__ == "__main__":
+    launcher.ensure_relaunch()
+    launcher.set_title(f"PvZRSkinTools v{APP_VERSION}")
     EXIT_CODE = main()
     input("Press Enter to continue...")
     raise SystemExit(EXIT_CODE)

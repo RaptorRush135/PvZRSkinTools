@@ -13,7 +13,7 @@ rst_dest = OUTPUT_DIR / "CPython-License.rst"
 if rst_dest.exists():
     print(f"  Skipping download, already exists: {rst_dest}")
 else:
-    print(f"Downloading {LICENSE_URL}...")
+    print(f"  Downloading {LICENSE_URL}...")
     urlretrieve(LICENSE_URL, rst_dest)
     print(f"  Saved to {rst_dest}")
 

@@ -1,0 +1,7 @@
+This distribution includes a modified version of Alacritty.
+
+Modification:
+- The executable icon has been changed to match the icon of this application.
+
+Original project:
+https://github.com/alacritty/alacritty
