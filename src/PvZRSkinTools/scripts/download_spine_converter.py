@@ -1,7 +1,6 @@
 from pathlib import Path
 from urllib.request import urlretrieve
 from zipfile import ZipFile
-import shutil
 
 
 REPO_URL = (
@@ -9,8 +8,8 @@ REPO_URL = (
     "/releases/download/v3.7/SpineSkeletonDataConverter.zip"
 )
 
-zip_path = Path("scripts/cache/SpineSkeletonDataConverter.zip")
-extract_dir = Path("tools")
+zip_path = Path("build/cache/SpineSkeletonDataConverter.zip")
+extract_dir = Path("build/include/tools")
 
 zip_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -20,5 +19,3 @@ if not zip_path.exists():
 
 with ZipFile(zip_path) as zip_file:
     zip_file.extract("SpineSkeletonDataConverter.exe", extract_dir)
-
-shutil.copy("scripts/SpineSkeletonDataConverter-License.txt", extract_dir)

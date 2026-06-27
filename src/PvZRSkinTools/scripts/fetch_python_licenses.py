@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.request import urlretrieve
 
 
-OUTPUT_DIR = Path("licenses")
+OUTPUT_DIR = Path("build/include")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 LICENSE_URL = "https://raw.githubusercontent.com/python/cpython/main/Doc/license.rst"

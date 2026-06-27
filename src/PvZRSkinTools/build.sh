@@ -29,9 +29,8 @@ uv run nuitka --standalone \
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
-cp -r tools/ build/PvZRSkinTools/
-
-cp -r licenses/* build/PvZRSkinTools/
+cp -r include/* build/PvZRSkinTools/
+cp -r build/include/* build/PvZRSkinTools/
 
 uv run pip-licenses --format=plain-vertical \
   --with-license-file --no-license-path \
