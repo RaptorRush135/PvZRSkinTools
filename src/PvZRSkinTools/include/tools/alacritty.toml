@@ -15,3 +15,13 @@ bindings = [
     { key = "V", mods = "Control", action = "Paste" },
     { key = "C", mods = "Control|Shift", chars = "\u0003" },
 ]
+
+[bell]
+command = { 
+    program = "powershell.exe",
+    args = [
+        "-NoProfile",
+        "-c",
+        "[System.Media.SystemSounds]::Asterisk.Play()"
+    ]
+}
