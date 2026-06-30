@@ -26,6 +26,7 @@ INTERACTIVE=0 bash setup.sh
 
 uv run nuitka --standalone \
   --user-package-configuration-file=package-config.yaml \
+  --windows-icon-from-ico=build/cache/icon.ico \
   --enable-plugin=tk-inter \
   --include-package=UnityPy \
   --include-package-data=UnityPy \
@@ -46,13 +47,18 @@ uv run nuitka --standalone \
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
+echo "Copying include files..."
 cp -r include/* build/PvZRSkinTools/
 cp -r build/include/tools build/PvZRSkinTools/
 cp -r build/include/CPython-License.rst build/PvZRSkinTools/
 cp -r build/include/Python-License.txt build/PvZRSkinTools/
 
-# TODO: Modify icon
+echo "Adding icon to launcher..."
+npx --yes resedit-cli \
+  build/PvZRSkinTools/tools/alacritty.exe build/PvZRSkinTools/tools/alacritty.exe \
+  --icon 257,build/cache/icon.ico
 
+echo "Generating third-party licenses..."
 uv run pip-licenses --format=plain-vertical \
   --with-license-file --no-license-path \
   --output-file build/PvZRSkinTools/THIRD_PARTY_LICENSES.txt
