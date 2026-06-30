@@ -23,7 +23,7 @@ def ensure_relaunch() -> None:
     # pylint: disable=consider-using-with
     subprocess.Popen(
         [
-            TOOLS_DIR / "alacritty.exe",
+            str(TOOLS_DIR / "alacritty.exe"),
             "--config-file",
             str(TOOLS_DIR / "alacritty.toml"),
             "--command",
