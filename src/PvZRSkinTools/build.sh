@@ -47,7 +47,9 @@ uv run nuitka --standalone \
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
 cp -r include/* build/PvZRSkinTools/
-cp -r build/include/* build/PvZRSkinTools/
+cp -r build/include/tools build/PvZRSkinTools/
+cp -r build/include/CPython-License.rst build/PvZRSkinTools/
+cp -r build/include/Python-License.txt build/PvZRSkinTools/
 
 # TODO: Modify icon
 
