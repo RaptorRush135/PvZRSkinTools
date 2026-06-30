@@ -1,7 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-trap 'echo "Error occurred! Press Enter to exit..."; read' ERR
+if [[ -z "${CI:-}" ]]; then
+  trap '
+    tput bel
+    echo "Error occurred! Press Enter to exit..."
+    read
+  ' ERR
+fi
+
+VERSION=$(
+  uv run python -c '
+from importlib.metadata import version
+print(version("pvzrskintools"))
+')
+PRODUCT_VERSION=$(uv run python scripts/get_product_version.py)
+
+echo "Building..."
+echo "Version: $VERSION"
+echo "Product Version: $PRODUCT_VERSION"
 
 rm -rf build/PvZRSkinTools
 rm -rf build/PvZRSkinTools.build
@@ -11,6 +28,7 @@ INTERACTIVE=0 bash setup.sh
 
 uv run nuitka --standalone \
   --user-package-configuration-file=package-config.yaml \
+  --windows-icon-from-ico=build/cache/icon.ico \
   --enable-plugin=tk-inter \
   --include-package=UnityPy \
   --include-package-data=UnityPy \
@@ -26,18 +44,35 @@ uv run nuitka --standalone \
   --output-folder-name=PvZRSkinTools \
   --output-filename=PvZRSkinTools.exe \
   --product-name=PvZRSkinTools \
-  --product-version=0.0.1 \
+  --product-version="$PRODUCT_VERSION" \
   src/main.py
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
+echo "Copying include files..."
 cp -r include/* build/PvZRSkinTools/
-cp -r build/include/* build/PvZRSkinTools/
+cp -r build/include/tools build/PvZRSkinTools/
+cp -r build/include/CPython-License.rst build/PvZRSkinTools/
+cp -r build/include/Python-License.txt build/PvZRSkinTools/
 
+echo "Adding icon to launcher..."
+if command -v npx >/dev/null 2>&1; then
+  npx --yes resedit-cli \
+    build/PvZRSkinTools/tools/alacritty.exe build/PvZRSkinTools/tools/alacritty.exe \
+    --icon 257,build/cache/icon.ico
+else
+  echo "Warning: npx not found; skipping launcher icon update."
+fi
+
+echo "Generating third-party licenses..."
 uv run pip-licenses --format=plain-vertical \
   --with-license-file --no-license-path \
   --output-file build/PvZRSkinTools/THIRD_PARTY_LICENSES.txt
 
-tput bel
 
-read -p "Build finished. Press Enter to exit..."
+echo "Build finished..."
+
+if [[ -z "${CI:-}" ]]; then
+  tput bel
+  read -p "Press Enter to exit..."
+fi

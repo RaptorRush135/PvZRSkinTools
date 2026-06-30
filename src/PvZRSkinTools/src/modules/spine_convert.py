@@ -1,6 +1,6 @@
 from pathlib import Path
 import shlex
-from typing import Callable, Optional
+from typing import Optional
 
 from rich.console import Console
 
@@ -10,6 +10,33 @@ from src.choice_picker import Choice
 from src import spine_converter
 from src.spine_converter import SpineVersion
 from src.spine_converter import SkeletonFormat
+
+
+class SpineConvertLogger:
+    def __init__(self, console: Console) -> None:
+        self._console = console
+
+    def print_info(self, message: str) -> None:
+        self._console.print(message)
+
+    def print_processing(self, path: Path) -> None:
+        self._console.print(f"Processing: [dim]{path}")
+
+    def print_warning(self, message: str) -> None:
+        self._console.print(f"[yellow]⚠  {message}\n")
+
+    def print_success(self, message: str = "Converted") -> None:
+        self._console.print(f"[bold green] ✓ {message}\n")
+
+    def print_error(self, message: str) -> None:
+        self._console.print(f"[red]{message}\n")
+
+    def print_exception(self) -> None:
+        self._console.print_exception()
+        self._console.print()
+
+    def print_done(self) -> None:
+        self._console.print("[bold green]✓ Done!\n")
 
 
 def run(console: Console) -> None:
@@ -36,21 +63,23 @@ def run(console: Console) -> None:
         choices=skel_choices,
     )
 
+    logger = SpineConvertLogger(console)
+
     while True:
-        raw_paths = __read_paths(console)
+        raw_paths = __read_paths(logger)
         if len(raw_paths) == 0:
             return
 
         paths = __resolve_paths(raw_paths)
-        console.print(f"Resolved {len(paths)} file(s) to process:")
+        logger.print_info(f"Resolved {len(paths)} file(s) to process:")
         for path in paths:
-            console.print(f"[dim]{path}")
+            logger.print_info(f"[dim]{path}")
 
-        __process_paths(console, paths, version, skel_format)
+        __process_paths(logger, paths, version, skel_format)
 
 
-def __read_paths(console: Console) -> list[Path]:
-    console.print(
+def __read_paths(logger: SpineConvertLogger) -> list[Path]:
+    logger.print_info(
         "Drag & drop files into this terminal and press Enter "
         "(or leave empty to go back):"
     )
@@ -93,61 +122,69 @@ def __resolve_paths(paths: list[Path]) -> list[Path]:
 
 
 def __process_paths(
-    console: Console,
+    logger: SpineConvertLogger,
     paths: list[Path],
     version: SpineVersion | None,
     skel_format: SkeletonFormat | None,
 ):
-    def print_success() -> None:
-        console.print("[bold green] ✓ Converted\n")
-
-    def print_warning(message: str) -> None:
-        console.print(f"[yellow]⚠  {message}\n")
-
     print()
 
     if not paths:
-        print_warning("No files provided, aborting.")
+        logger.print_warning("No files provided, aborting.")
         return
 
     for path in paths:
-        console.print(f"Processing: [dim]{path}")
+        logger.print_processing(path)
         if not path.exists():
-            print_warning("Path does not exist!")
+            logger.print_warning("Path does not exist!")
             continue
 
         suffix = path.suffix.lower()
         try:
-            if suffix != ".atlas":
-                out_path = __validate_output_path(
-                    __try_get_output_path(path, version, skel_format),
-                    print_warning,
-                )
-                if out_path is None:
-                    continue
-
-                console.print(f" - Converting skeleton: {path.name} -> {out_path.name}")
-                error = spine_converter.convert_skeleton(path, out_path, version)
-                if error is None:
-                    print_success()
-                else:
-                    console.print(f" [red]{error}\n")
+            if suffix == ".atlas":
+                __process_atlas_path(logger, path, version)
             else:
-                out_path = __validate_output_path(
-                    __try_get_output_path(path, version), print_warning
-                )
-                if out_path is None:
-                    continue
-
-                assert version is not None
-                console.print(f" - Converting atlas: {path.name} -> {out_path.name}")
-                spine_converter.convert_atlas(path, out_path, version)
-                print_success()
+                __process_skeleton_path(logger, path, version, skel_format)
         except Exception:  # pylint: disable=broad-exception-caught
-            console.print_exception()
-            console.print()
+            logger.print_exception()
 
-    console.print("[bold green]✓ Done!\n")
+    logger.print_done()
+
+
+def __process_skeleton_path(
+    logger: SpineConvertLogger,
+    path: Path,
+    version: SpineVersion | None,
+    skel_format: SkeletonFormat | None,
+) -> None:
+    out_path = __validate_output_path(
+        __try_get_output_path(path, version, skel_format),
+        logger,
+    )
+    if out_path is None:
+        return
+
+    logger.print_info(f" - Converting skeleton: {path.name} -> {out_path.name}")
+    error = spine_converter.convert_skeleton(path, out_path, version)
+    if error is None:
+        logger.print_success()
+    else:
+        logger.print_error(f" {error}")
+
+
+def __process_atlas_path(
+    logger: SpineConvertLogger,
+    path: Path,
+    version: SpineVersion | None,
+) -> None:
+    out_path = __validate_output_path(__try_get_output_path(path, version), logger)
+    if out_path is None:
+        return
+
+    assert version is not None
+    logger.print_info(f" - Converting atlas: {path.name} -> {out_path.name}")
+    spine_converter.convert_atlas(path, out_path, version)
+    logger.print_success()
 
 
 def __try_get_output_path(
@@ -166,13 +203,13 @@ def __try_get_output_path(
 
 
 def __validate_output_path(
-    out_path: Path | None, print_warning: Callable[[str], None]
+    out_path: Path | None, logger: SpineConvertLogger
 ) -> Path | None:
     if out_path is None:
-        print_warning("Skipping: No conversion!")
+        logger.print_warning("Skipping: No conversion!")
         return None
     if out_path.exists():
-        print_warning(f"Skipping: Output file already exists ({out_path.name})")
+        logger.print_warning(f"Skipping: Output file already exists ({out_path.name})")
         return None
 
     return out_path

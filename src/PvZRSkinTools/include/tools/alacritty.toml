@@ -1,0 +1,28 @@
+[general]
+import = ["afterglow.toml"]
+
+[window]
+title = "PvZRSkinTools"
+padding = { x = 8, y = 8 }
+dynamic_padding = true
+
+[cursor]
+style = { shape = "Beam" }
+
+[keyboard]
+bindings = [
+    { key = "NumpadEnter", chars = "\r" },
+    { key = "C", mods = "Control", action = "Copy" },
+    { key = "V", mods = "Control", action = "Paste" },
+    { key = "C", mods = "Control|Shift", chars = "\u0003" },
+]
+
+[bell]
+command = { 
+    program = "powershell.exe",
+    args = [
+        "-NoProfile",
+        "-c",
+        "[System.Media.SystemSounds]::Asterisk.Play()"
+    ]
+}

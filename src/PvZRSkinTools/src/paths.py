@@ -1,5 +1,9 @@
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+IS_BUILD = "__compiled__" in globals()
 
-TOOLS_DIR = BASE_DIR.parent / "tools"
+__base_dir = Path(__file__).parent.parent
+
+BASE_DIR = __base_dir if IS_BUILD else __base_dir / "build" / "include"
+
+TOOLS_DIR = BASE_DIR / "tools"

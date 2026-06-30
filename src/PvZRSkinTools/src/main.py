@@ -2,6 +2,8 @@ import time
 
 from rich.console import Console
 
+from src import launcher
+
 from src import choice_picker
 from src.choice_picker import Choice
 
@@ -9,13 +11,10 @@ from src.modules import extract_bundle
 from src.modules import spine_convert
 
 
-APP_VERSION = "0.0.1"
-
 console = Console()
 
 
 def main() -> int:
-    print(f"PvZRSkinTools v{APP_VERSION}\n")
     try:
         menu()
     except KeyboardInterrupt:
@@ -52,7 +51,7 @@ def menu() -> None:
 
 def handle_options(choice: int) -> bool:
     def show_cancel_msg():
-        console.print("[dim]Press Ctrl+C to cancel a operation...[dim]\n")
+        console.print("[dim]Press Ctrl+Shift+C to cancel a operation...[dim]\n")
 
     match choice:
         case 1:
@@ -68,6 +67,8 @@ def handle_options(choice: int) -> bool:
 
 
 if __name__ == "__main__":
+    launcher.ensure_relaunch()
+    launcher.set_title(f"PvZRSkinTools v{launcher.get_version()}")
     EXIT_CODE = main()
     input("Press Enter to continue...")
     raise SystemExit(EXIT_CODE)
