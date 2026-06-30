@@ -12,7 +12,7 @@ VERSION=$(
 from importlib.metadata import version
 print(version("pvzrskintools"))
 ')
-PRODUCT_VERSION=$(uv run python scripts/get_nuitka_version.py)
+PRODUCT_VERSION=$(uv run python scripts/get_product_version.py)
 
 echo "Building..."
 echo "Version: $VERSION"

@@ -2,7 +2,7 @@ from importlib.metadata import version
 from packaging.version import Version
 
 
-def get_nuitka_version(package: str) -> str:
+def get_product_version(package: str) -> str:
     v = Version(version(package))
 
     major = v.major
@@ -14,4 +14,4 @@ def get_nuitka_version(package: str) -> str:
 
 
 if __name__ == "__main__":
-    print(get_nuitka_version("pvzrskintools"))
+    print(get_product_version("pvzrskintools"))
