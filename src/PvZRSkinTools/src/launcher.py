@@ -1,6 +1,7 @@
 import os
 import subprocess
 import sys
+from importlib.metadata import version
 
 from src.paths import IS_BUILD, TOOLS_DIR
 
@@ -32,6 +33,10 @@ def ensure_relaunch() -> None:
     )
 
     os._exit(0)
+
+
+def get_version() -> str:
+    return version("pvzrskintools")
 
 
 def set_title(title: str) -> None:

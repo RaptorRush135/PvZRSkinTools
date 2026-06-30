@@ -7,6 +7,17 @@ trap '
   read
 ' ERR
 
+VERSION=$(
+  uv run python -c '
+from importlib.metadata import version
+print(version("pvzrskintools"))
+')
+PRODUCT_VERSION=$(uv run python scripts/get_nuitka_version.py)
+
+echo "Building..."
+echo "Version: $VERSION"
+echo "Product Version: $PRODUCT_VERSION"
+
 rm -rf build/PvZRSkinTools
 rm -rf build/PvZRSkinTools.build
 rm -rf build/PvZRSkinTools.dist
@@ -30,7 +41,7 @@ uv run nuitka --standalone \
   --output-folder-name=PvZRSkinTools \
   --output-filename=PvZRSkinTools.exe \
   --product-name=PvZRSkinTools \
-  --product-version=0.0.1 \
+  --product-version="$PRODUCT_VERSION" \
   src/main.py
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools

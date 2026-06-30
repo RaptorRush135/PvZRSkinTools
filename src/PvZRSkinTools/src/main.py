@@ -11,8 +11,6 @@ from src.modules import extract_bundle
 from src.modules import spine_convert
 
 
-APP_VERSION = "0.0.1"
-
 console = Console()
 
 
@@ -70,7 +68,7 @@ def handle_options(choice: int) -> bool:
 
 if __name__ == "__main__":
     launcher.ensure_relaunch()
-    launcher.set_title(f"PvZRSkinTools v{APP_VERSION}")
+    launcher.set_title(f"PvZRSkinTools v{launcher.get_version()}")
     EXIT_CODE = main()
     input("Press Enter to continue...")
     raise SystemExit(EXIT_CODE)
