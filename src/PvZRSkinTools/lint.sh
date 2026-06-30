@@ -10,4 +10,6 @@ echo "Running Pylint..."
 uv run pylint src
 uv run pylint scripts
 
-read -p "Press Enter to exit..."
+if [[ -z "${CI:-}" ]]; then
+  read -p "Press Enter to exit..."
+fi

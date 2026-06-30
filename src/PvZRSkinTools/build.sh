@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-trap '
-  tput bel
-  echo "Error occurred! Press Enter to exit..."
-  read
-' ERR
+if [[ -z "${CI:-}" ]]; then
+  trap '
+    tput bel
+    echo "Error occurred! Press Enter to exit..."
+    read
+  ' ERR
+fi
 
 VERSION=$(
   uv run python -c '
@@ -63,6 +65,10 @@ uv run pip-licenses --format=plain-vertical \
   --with-license-file --no-license-path \
   --output-file build/PvZRSkinTools/THIRD_PARTY_LICENSES.txt
 
-tput bel
 
-read -p "Build finished. Press Enter to exit..."
+echo "Build finished..."
+
+if [[ -z "${CI:-}" ]]; then
+  tput bel
+  read -p "Press Enter to exit..."
+fi
