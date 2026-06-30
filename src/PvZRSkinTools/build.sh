@@ -56,9 +56,13 @@ cp -r build/include/CPython-License.rst build/PvZRSkinTools/
 cp -r build/include/Python-License.txt build/PvZRSkinTools/
 
 echo "Adding icon to launcher..."
-npx --yes resedit-cli \
-  build/PvZRSkinTools/tools/alacritty.exe build/PvZRSkinTools/tools/alacritty.exe \
-  --icon 257,build/cache/icon.ico
+if command -v npx >/dev/null 2>&1; then
+  npx --yes resedit-cli \
+    build/PvZRSkinTools/tools/alacritty.exe build/PvZRSkinTools/tools/alacritty.exe \
+    --icon 257,build/cache/icon.ico
+else
+  echo "Warning: npx not found; skipping launcher icon update."
+fi
 
 echo "Generating third-party licenses..."
 uv run pip-licenses --format=plain-vertical \
