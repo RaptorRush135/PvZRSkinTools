@@ -5,6 +5,9 @@ from importlib.metadata import version
 
 from src.paths import IS_BUILD, TOOLS_DIR
 
+if sys.platform == "win32":
+    import msvcrt
+
 
 RELAUNCH_ENV_VAR = "PVZRSKINTOOLS_RELAUNCH"
 
@@ -42,3 +45,9 @@ def get_version() -> str:
 def set_title(title: str) -> None:
     if sys.platform == "win32":
         os.system(f"title {title}")
+
+
+def flush_input():
+    if sys.platform == "win32":
+        while msvcrt.kbhit():
+            msvcrt.getch()

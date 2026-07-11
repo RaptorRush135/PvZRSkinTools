@@ -29,6 +29,7 @@ def main() -> int:
 
 def menu() -> None:
     while True:
+        launcher.flush_input()
         choice = choice_picker.prompt(
             message="Pick an option:",
             choices=[
