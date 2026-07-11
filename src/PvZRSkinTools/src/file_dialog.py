@@ -18,10 +18,14 @@ class FileDialog:
         title: str,
         initial_directory: str | None = None,
         must_be_empty: bool = False,
+        create_if_missing: bool = False,
     ) -> Path:
         self.console.print(f"{title}:")
 
         while True:
+            if initial_directory is not None and create_if_missing:
+                Path(initial_directory).mkdir(parents=True, exist_ok=True)
+
             directory = filedialog.askdirectory(
                 title=title, initialdir=initial_directory
             )

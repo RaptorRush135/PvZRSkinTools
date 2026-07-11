@@ -24,10 +24,13 @@ def run(console: Console) -> None:
 
     bundle_path = game_scanner.pick_spine_bundle(dialog)
 
+    default_output_directory = BASE_DIR / "output"
+
     output_directory = dialog.pick_directory(
         "Select an output directory",
-        initial_directory=str(BASE_DIR),
+        initial_directory=str(default_output_directory),
         must_be_empty=True,
+        create_if_missing=True,
     )
 
     console.print("[bold cyan]Loading bundle...[/bold cyan]")
