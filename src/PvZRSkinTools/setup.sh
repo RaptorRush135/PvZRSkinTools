@@ -8,6 +8,9 @@ if [[ -z "${CI:-}" ]]; then
     read
   ' ERR
 fi
+else
+  trap 'echo "::error::Script failed at line $LINENO"' ERR
+fi
 
 if [[ -z "${CI:-}" ]]; then
   npm --prefix ./node-tools install
