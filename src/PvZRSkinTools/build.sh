@@ -28,18 +28,17 @@ rm -rf build/PvZRSkinTools.dist
 
 INTERACTIVE=0 bash setup.sh
 
-NUITKA_EXTRA_FLAGS=()
+NUITKA_CI_FLAGS=()
 if [[ -n "${CI:-}" ]]; then
-  NUITKA_EXTRA_FLAGS+=(--low-memory --show-progress)
+  NUITKA_CI_FLAGS+=(--assume-yes-for-downloads --low-memory --show-progress --show-scons)
 fi
 
 uv run nuitka --standalone \
-  "${NUITKA_EXTRA_FLAGS[@]}" \
-  --assume-yes-for-downloads \
+  "${NUITKA_CI_FLAGS[@]}" \
   --user-package-configuration-file=package-config.yaml \
   --windows-icon-from-ico=build/cache/icon.ico \
   --enable-plugin=tk-inter \
-  --include-package=UnityPy \
+  --include-package=UnityPy.resources \
   --include-package-data=UnityPy \
   --include-package-data=archspec \
   --noinclude-dlls=libcrypto-3-x64.dll \
@@ -55,6 +54,13 @@ uv run nuitka --standalone \
   --product-name=PvZRSkinTools \
   --product-version="$PRODUCT_VERSION" \
   src/main.py
+
+EXE_PATH="build/PvZRSkinTools.dist/PvZRSkinTools.exe"
+
+if [[ ! -f "$EXE_PATH" ]]; then
+  echo "::error::Build failed — $EXE_PATH was not produced" >&2
+  exit 1
+fi
 
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
