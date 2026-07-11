@@ -7,6 +7,8 @@ if [[ -z "${CI:-}" ]]; then
     echo "Error occurred! Press Enter to exit..."
     read
   ' ERR
+else
+  trap 'echo "::error::Script failed at line $LINENO"' ERR
 fi
 
 VERSION=$(
@@ -26,7 +28,13 @@ rm -rf build/PvZRSkinTools.dist
 
 INTERACTIVE=0 bash setup.sh
 
+NUITKA_EXTRA_FLAGS=()
+if [[ -n "${CI:-}" ]]; then
+  NUITKA_EXTRA_FLAGS+=(--low-memory --show-progress)
+fi
+
 uv run nuitka --standalone \
+  "${NUITKA_EXTRA_FLAGS[@]}" \
   --assume-yes-for-downloads \
   --user-package-configuration-file=package-config.yaml \
   --windows-icon-from-ico=build/cache/icon.ico \
