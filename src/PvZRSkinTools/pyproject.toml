@@ -9,7 +9,6 @@ root = "../.."
 name = "pvzrskintools"
 dynamic = ["version"]
 description = "Add your description here"
-readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "inquirerpy>=0.3.4",
