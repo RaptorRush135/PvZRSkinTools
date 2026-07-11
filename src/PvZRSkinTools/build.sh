@@ -27,6 +27,7 @@ rm -rf build/PvZRSkinTools.dist
 INTERACTIVE=0 bash setup.sh
 
 uv run nuitka --standalone \
+  --assume-yes-for-downloads \
   --user-package-configuration-file=package-config.yaml \
   --windows-icon-from-ico=build/cache/icon.ico \
   --enable-plugin=tk-inter \
