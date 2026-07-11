@@ -9,7 +9,10 @@ if [[ -z "${CI:-}" ]]; then
   ' ERR
 fi
 
-uv sync
+if [[ -z "${CI:-}" ]]; then
+  npm --prefix ./node-tools install
+  uv sync
+fi
 
 uv run python scripts/fetch_python_licenses.py
 

@@ -8,6 +8,7 @@ from src import choice_picker
 from src.choice_picker import Choice
 
 from src.modules import extract_bundle
+from src.modules import guid_generator
 from src.modules import spine_convert
 
 
@@ -32,8 +33,9 @@ def menu() -> None:
             message="Pick an option:",
             choices=[
                 Choice(value=1, name="1. Spine convert"),
-                Choice(value=2, name="2. Extract bundle"),
-                Choice(value=3, name="3. Exit"),
+                Choice(value=2, name="2. GUID generator"),
+                Choice(value=3, name="3. Extract bundle"),
+                Choice(value=4, name="4. Exit"),
             ],
         )
 
@@ -59,6 +61,10 @@ def handle_options(choice: int) -> bool:
             spine_convert.run(console)
             return False
         case 2:
+            show_cancel_msg()
+            guid_generator.run(console)
+            return False
+        case 3:
             show_cancel_msg()
             extract_bundle.run(console)
             return False

@@ -9,10 +9,10 @@ root = "../.."
 name = "pvzrskintools"
 dynamic = ["version"]
 description = "Add your description here"
-readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "inquirerpy>=0.3.4",
+    "pyperclip>=1.11.0",
     "rich>=15.0.0",
     "spineatlas>=1.0.13",
     "unitypy>=1.25.0",

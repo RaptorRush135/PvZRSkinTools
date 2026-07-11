@@ -14,7 +14,7 @@ def is_text_asset(data: PPtr[Object]) -> TypeGuard[PPtr[TextAsset]]:
 
 
 def write_text_asset(text_asset: TextAsset, output_path: Path) -> None:
-    output_path.write_text(text_asset.m_Script, encoding="utf-8")
+    output_path.write_text(text_asset.m_Script, encoding="utf-8", newline="")
 
 
 def write_binary_text_asset(text_asset: TextAsset, output_path: Path) -> None:

@@ -50,19 +50,15 @@ uv run nuitka --standalone \
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
 echo "Copying include files..."
+cp -r ../../LICENSE build/PvZRSkinTools/PvZRSkinTools-License.txt
+cp -r ../../README.md build/PvZRSkinTools/
 cp -r include/* build/PvZRSkinTools/
 cp -r build/include/tools build/PvZRSkinTools/
 cp -r build/include/CPython-License.rst build/PvZRSkinTools/
 cp -r build/include/Python-License.txt build/PvZRSkinTools/
 
 echo "Adding icon to launcher..."
-if command -v npx >/dev/null 2>&1; then
-  npx --yes resedit-cli \
-    build/PvZRSkinTools/tools/alacritty.exe build/PvZRSkinTools/tools/alacritty.exe \
-    --icon 257,build/cache/icon.ico
-else
-  echo "Warning: npx not found; skipping launcher icon update."
-fi
+npm --prefix ./node-tools run set-launcher-icon
 
 echo "Generating third-party licenses..."
 uv run pip-licenses --format=plain-vertical \
