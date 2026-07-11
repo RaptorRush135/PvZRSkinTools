@@ -7,7 +7,6 @@ if [[ -z "${CI:-}" ]]; then
     echo "Error occurred! Press Enter to exit..."
     read
   ' ERR
-fi
 else
   trap 'echo "::error::Script failed at line $LINENO"' ERR
 fi
