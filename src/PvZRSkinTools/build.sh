@@ -30,12 +30,13 @@ INTERACTIVE=0 bash setup.sh
 
 NUITKA_CI_FLAGS=()
 if [[ -n "${CI:-}" ]]; then
-  NUITKA_CI_FLAGS+=(--assume-yes-for-downloads --low-memory --show-progress --show-scons)
+  NUITKA_CI_FLAGS+=(--assume-yes-for-downloads --show-progress --show-scons)
 fi
 
 uv run nuitka --standalone \
   "${NUITKA_CI_FLAGS[@]}" \
   --user-package-configuration-file=package-config.yaml \
+  --user-plugin=scripts/unitypy_nuitka_plugin.py \
   --windows-icon-from-ico=build/cache/icon.ico \
   --enable-plugin=tk-inter \
   --include-package=UnityPy.resources \
