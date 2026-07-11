@@ -50,6 +50,8 @@ uv run nuitka --standalone \
 mv build/PvZRSkinTools.dist build/PvZRSkinTools
 
 echo "Copying include files..."
+cp -r ../../LICENSE build/PvZRSkinTools/PvZRSkinTools-License.txt
+cp -r ../../README.md build/PvZRSkinTools/
 cp -r include/* build/PvZRSkinTools/
 cp -r build/include/tools build/PvZRSkinTools/
 cp -r build/include/CPython-License.rst build/PvZRSkinTools/
