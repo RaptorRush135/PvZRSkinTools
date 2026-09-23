@@ -2,15 +2,9 @@ import time
 
 from rich.console import Console
 
-from src import launcher
-
-from src import choice_picker
+from src import choice_picker, launcher
 from src.choice_picker import Choice
-
-from src.modules import extract_bundle
-from src.modules import guid_generator
-from src.modules import spine_convert
-
+from src.modules import extract_bundle, guid_generator, spine_convert
 
 console = Console()
 
@@ -21,7 +15,7 @@ def main() -> int:
     except KeyboardInterrupt:
         console.print("\nCancelled...")
         return 130
-    except Exception:  # pylint: disable=broad-exception-caught
+    except Exception:  # pylint: disable=broad-exception-caught  # noqa: BLE001
         console.print_exception(show_locals=True)
         return 1
     return 0

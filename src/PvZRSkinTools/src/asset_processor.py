@@ -2,9 +2,7 @@ from pathlib import Path
 
 from UnityPy.classes import Object, PPtr
 
-from src import unitypy_utils
-from src import asset_classifier
-from src import spine_converter
+from src import asset_classifier, spine_converter, unitypy_utils
 from src.spine_converter import SpineVersion
 
 

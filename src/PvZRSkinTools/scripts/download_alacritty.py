@@ -3,23 +3,31 @@ from urllib.request import urlretrieve
 
 DOWNLOADS = [
     (
-        "https://github.com/alacritty/alacritty"
-        "/releases/download/v0.17.0/Alacritty-v0.17.0-portable.exe",
+        (
+            "https://github.com/alacritty/alacritty"
+            "/releases/download/v0.17.0/Alacritty-v0.17.0-portable.exe"
+        ),
         "alacritty.exe",
     ),
     (
-        "https://raw.githubusercontent.com/alacritty/alacritty"
-        "/refs/heads/master/LICENSE-APACHE",
+        (
+            "https://raw.githubusercontent.com/alacritty/alacritty"
+            "/refs/heads/master/LICENSE-APACHE"
+        ),
         "Alacritty-License.txt",
     ),
     (
-        "https://raw.githubusercontent.com/alacritty/alacritty-theme"
-        "/refs/heads/master/themes/afterglow.toml",
+        (
+            "https://raw.githubusercontent.com/alacritty/alacritty-theme"
+            "/refs/heads/master/themes/afterglow.toml"
+        ),
         "afterglow.toml",
     ),
     (
-        "https://raw.githubusercontent.com/alacritty/alacritty-theme"
-        "/refs/heads/master/LICENSE",
+        (
+            "https://raw.githubusercontent.com/alacritty/alacritty-theme"
+            "/refs/heads/master/LICENSE"
+        ),
         "Alacritty-Theme-License.txt",
     ),
 ]

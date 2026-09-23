@@ -1,6 +1,5 @@
 import subprocess
-from enum import Enum
-from enum import StrEnum
+from enum import Enum, StrEnum
 from pathlib import Path
 
 from SpineAtlas import ReadAtlasFile  # pyright: ignore[reportMissingTypeStubs]

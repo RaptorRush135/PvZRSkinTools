@@ -2,7 +2,6 @@ from pathlib import Path
 from urllib.request import urlretrieve
 from zipfile import ZipFile
 
-
 REPO_URL = (
     "https://github.com/wang606/SpineSkeletonDataConverter"
     "/releases/download/v3.7/SpineSkeletonDataConverter.zip"
