@@ -1,20 +1,22 @@
 from pathlib import Path
 from urllib.request import urlretrieve
-from zipfile import ZipFile
 
+RELEASE_VERSION = "3.8"
 REPO_URL = (
     "https://github.com/wang606/SpineSkeletonDataConverter"
-    "/releases/download/v3.7/SpineSkeletonDataConverter.zip"
+    f"/releases/download/v{RELEASE_VERSION}/SpineSkeletonDataConverter.exe"
 )
 
-zip_path = Path("build/cache/SpineSkeletonDataConverter.zip")
-extract_dir = Path("build/include/tools")
+exe_path = Path(f"build/cache/SpineSkeletonDataConverter-v{RELEASE_VERSION}.exe")
+target_path = Path("build/include/tools/SpineSkeletonDataConverter.exe")
 
-zip_path.parent.mkdir(parents=True, exist_ok=True)
+exe_path.parent.mkdir(parents=True, exist_ok=True)
+target_path.parent.mkdir(parents=True, exist_ok=True)
 
-if not zip_path.exists():
+if not exe_path.exists():
     print(f"  Downloading {REPO_URL}...")
-    urlretrieve(REPO_URL, zip_path)
+    urlretrieve(REPO_URL, exe_path)
+else:
+    print(f"  Skipping download, already exists: {exe_path}")
 
-with ZipFile(zip_path) as zip_file:
-    zip_file.extract("SpineSkeletonDataConverter.exe", extract_dir)
+target_path.write_bytes(exe_path.read_bytes())
