@@ -1,15 +1,11 @@
-from pathlib import Path
 import shlex
-from typing import Optional
+from pathlib import Path
 
 from rich.console import Console
 
-from src import choice_picker
+from src import choice_picker, spine_converter
 from src.choice_picker import Choice
-
-from src import spine_converter
-from src.spine_converter import SpineVersion
-from src.spine_converter import SkeletonFormat
+from src.spine_converter import SkeletonFormat, SpineVersion
 
 
 class SpineConvertLogger:
@@ -40,7 +36,7 @@ class SpineConvertLogger:
 
 
 def run(console: Console) -> None:
-    version: Optional[SpineVersion] = choice_picker.prompt(
+    version: SpineVersion | None = choice_picker.prompt(
         message="Pick output Spine Version:",
         choices=[
             Choice(value=None, name="Keep (use input version)"),
@@ -49,7 +45,7 @@ def run(console: Console) -> None:
         ],
     )
 
-    skel_choices: list[Choice[Optional[SkeletonFormat]]] = [
+    skel_choices: list[Choice[SkeletonFormat | None]] = [
         Choice(value=None, name="Keep (same as input)"),
         Choice(value=SkeletonFormat.SKEL, name=SkeletonFormat.SKEL.value),
         Choice(value=SkeletonFormat.JSON, name=SkeletonFormat.JSON.value),
@@ -145,7 +141,7 @@ def __process_paths(
                 __process_atlas_path(logger, path, version)
             else:
                 __process_skeleton_path(logger, path, version, skel_format)
-        except Exception:  # pylint: disable=broad-exception-caught
+        except Exception:  # pylint: disable=broad-exception-caught  # noqa: BLE001
             logger.print_exception()
 
     logger.print_done()

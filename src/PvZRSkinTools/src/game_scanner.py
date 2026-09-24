@@ -1,9 +1,7 @@
 import os
-
 from pathlib import Path
 
 from src.file_dialog import FileDialog
-
 
 GAME_DIR_NAME = "PVZ Replanted"
 

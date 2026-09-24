@@ -1,11 +1,10 @@
-import time
 import random
+import time
 import uuid
 
+import pyperclip
 from rich.console import Console
 from rich.live import Live
-
-import pyperclip
 
 from src.choice_picker import Choice, prompt
 

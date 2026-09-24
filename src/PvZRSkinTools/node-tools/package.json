@@ -4,6 +4,6 @@
     "set-launcher-icon": "resedit ../build/PvZRSkinTools/tools/alacritty.exe ../build/PvZRSkinTools/tools/alacritty.exe --icon 257,../build/cache/icon.ico"
   },
   "devDependencies": {
-    "resedit-cli": "^3.1.0"
+    "resedit-cli": "^3.1.1"
   }
 }

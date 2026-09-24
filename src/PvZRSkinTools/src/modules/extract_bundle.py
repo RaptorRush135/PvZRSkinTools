@@ -1,20 +1,18 @@
 from pathlib import Path
 
 import UnityPy
-
+from rich.console import Console
 from rich.progress import (
+    BarColumn,
     Progress,
     SpinnerColumn,
-    TextColumn,
-    BarColumn,
     TaskProgressColumn,
+    TextColumn,
     TimeElapsedColumn,
 )
-from rich.console import Console
 from rich.table import Column
 
-from src import asset_processor
-from src import game_scanner
+from src import asset_processor, game_scanner
 from src.file_dialog import FileDialog
 from src.paths import BASE_DIR
 

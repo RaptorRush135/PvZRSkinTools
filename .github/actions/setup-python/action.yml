@@ -1,0 +1,20 @@
+name: Setup Python
+description: Install Python and uv, then sync dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version-file: src/PvZRSkinTools/.python-version
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      with:
+        version: "0.12.18"
+
+    - name: Sync dependencies
+      shell: bash
+      working-directory: src/PvZRSkinTools
+      run: uv sync --locked

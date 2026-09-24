@@ -1,4 +1,6 @@
-from nuitka.plugins.PluginBase import NuitkaPluginBase  # pyright: ignore[reportMissingTypeStubs]
+from nuitka.plugins.PluginBase import (  # pyright: ignore[reportMissingTypeStubs]
+    NuitkaPluginBase,
+)
 
 
 class UnityPyNuitkaPlugin(NuitkaPluginBase):

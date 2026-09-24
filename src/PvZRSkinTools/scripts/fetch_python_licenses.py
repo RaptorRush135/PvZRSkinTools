@@ -1,8 +1,7 @@
-import sys
 import shutil
+import sys
 from pathlib import Path
 from urllib.request import urlretrieve
-
 
 OUTPUT_DIR = Path("build/include")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

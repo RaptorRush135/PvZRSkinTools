@@ -1,3 +1,4 @@
+import ctypes
 import os
 import subprocess
 import sys
@@ -44,7 +45,7 @@ def get_version() -> str:
 
 def set_title(title: str) -> None:
     if sys.platform == "win32":
-        os.system(f"title {title}")
+        ctypes.windll.kernel32.SetConsoleTitleW(title)
 
 
 def flush_input():

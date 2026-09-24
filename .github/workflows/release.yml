@@ -17,16 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: "Set up Python"
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: src/PvZRSkinTools/.python-version
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
-
-      - name: Sync dependencies
-        run: uv sync --locked
+      - name: Set up Python
+        uses: ./.github/actions/setup-python
 
       - name: "Set up Node.js"
         uses: actions/setup-node@v6
