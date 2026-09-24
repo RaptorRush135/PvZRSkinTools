@@ -11,7 +11,7 @@ required-version = ">=0.12.18"
 [project]
 name = "pvzrskintools"
 dynamic = ["version"]
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "inquirerpy>=0.3.4",
     "pyperclip>=1.11.0",
